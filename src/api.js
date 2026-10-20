@@ -14,22 +14,20 @@ export async function apiRequest(url, options = {}) {
     // const { subject } = useMyContext();
     const defaultHeaders = {
         "Content-Type": "application/json",
-        "token": token ? `Bearer ${token}` : "", // Отправка токена в заголовках (если нужно)
+        "token": token ? `Bearer ${token}` : "",
         "Password": password ? password : ""
     };
-    // options.subject = subject;
-    // options.body
-    // http://localhost:5000/api/
-    // https://web-production-0b7b0.up.railway.app/api/
-    const response = await fetch('http://localhost:5000/api/' + url, {
+
+    const apiBase = import.meta.env.VITE_API_URL || '/api';
+    const endpoint = url.startsWith('/') ? url.slice(1) : url;
+    const response = await fetch(`${apiBase}/${endpoint}`, {
         ...options,
         headers: {
             ...defaultHeaders,
             ...options.headers,
         },
-        credentials: "include", // Отправка куки
+        credentials: "include",
         method: "POST",
-        // 'Access-Control-Allow-Credentials': 'true'
     });
 
     if (!response.ok) {
