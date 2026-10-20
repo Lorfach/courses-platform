@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
-import Lesson from './lesson_block/Lesson';
+import Lesson from './Lesson_block/Lesson';
 import { apiRequest } from '../api';
 import { useMyContext } from '../MyContext';
 
