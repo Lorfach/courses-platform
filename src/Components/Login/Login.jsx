@@ -40,10 +40,11 @@ export default function Login() {
             //     setError('Пароль неверный');
             // }
         } catch (err) {
-            if(err.message == 'User not found'){
+            if (err.message === 'User not found' || err.message === 'Пользователь не найден') {
                 setError('Пароль неверный');
-            } else setError(err.message);   
-            
+            } else {
+                setError(err.message);
+            }
         } finally {
             setIsLoading(false);
         }

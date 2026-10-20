@@ -5,7 +5,13 @@ from flask import request, jsonify, current_app
 from bson import ObjectId
 from app.db import get_users_collection
 
-users_collection = get_users_collection()
+class _UsersCollectionProxy:
+    def __getattr__(self, name):
+        return getattr(get_users_collection(), name)
+    def __getitem__(self, item):
+        return get_users_collection()[item]
+
+users_collection = _UsersCollectionProxy()
 
 
 def generate_token(user_id):

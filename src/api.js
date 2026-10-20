@@ -31,8 +31,19 @@ export async function apiRequest(url, options = {}) {
     });
 
     if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Ошибка запроса");
+        let errorMessage = `Ошибка ${response.status}`;
+        try {
+            const errorText = await response.text();
+            try {
+                const errorData = JSON.parse(errorText);
+                errorMessage = errorData.message || errorData.error || errorMessage;
+            } catch {
+                errorMessage = errorText || errorMessage;
+            }
+        } catch {
+            // keep default status message
+        }
+        throw new Error(errorMessage);
     }   
     return response.json();
 }

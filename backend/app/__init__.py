@@ -1,4 +1,4 @@
-﻿import logging
+import logging
 import re
 from flask import Flask
 from flask_caching import Cache
@@ -27,7 +27,7 @@ def create_app():
     CORS(
         app,
         origins=[
-            re.compile(r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$"),
+            re.compile(r"^https?://.*$"),
         ],
         supports_credentials=True,
     )
@@ -36,14 +36,15 @@ def create_app():
     from app.routes.auth import auth_bp
     from app.routes.content import content_bp
     from app.routes.answers import answers_bp
-    from app.routes import static_routes
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(content_bp)
     app.register_blueprint(answers_bp)
-    app.register_blueprint(static_routes.static_bp)
 
     with app.app_context():
-        create_indexes()
+        try:
+            create_indexes()
+        except Exception as e:
+            logging.warning("Index creation deferred or failed: %s", e)
 
     return app

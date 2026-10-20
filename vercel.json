@@ -14,26 +14,29 @@
     {
       "source": "/api/(.*)",
       "destination": {
-        "service": "backend"
+        "service": "backend",
+        "path": "/api/$1"
       }
     },
     {
       "source": "/assets/(.*)",
       "destination": {
-        "service": "app"
+        "service": "app",
+        "path": "/assets/$1"
       }
     },
     {
       "source": "/(.*\\.[a-zA-Z0-9]+)",
       "destination": {
-        "service": "app"
+        "service": "app",
+        "path": "/$1"
       }
     },
     {
       "source": "/(.*)",
       "destination": {
         "service": "app",
-        "path": "/index.html"
+        "path": "/"
       }
     }
   ]
