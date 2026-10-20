@@ -18,7 +18,7 @@ const Courses = () => {
     }, []);
     
     return (
-        <>
+        <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-6 md:px-12">
             <div className="text-3xl mx-auto mt-10 text-[#c5c5c5]">
                 <div className="inline-block">
                     Мои курсы
@@ -26,16 +26,14 @@ const Courses = () => {
                 </div>
             </div>
 
-            <div className="mx-auto px-10 mt-10 flex justify-center gap-10 flex-wrap">
+            <div className="mx-auto mt-10 flex justify-center gap-10 flex-wrap">
                 {subjects.length ? (
                     subjects.map((subj) => (
-                        
-                        
                         <Course_card subject={subj} key={subj}/>
                     ))
                 ) : null }
             </div>
-        </>
+        </div>
     );
 };
 
