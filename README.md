@@ -1,8 +1,31 @@
-# React + Vite
+# courses-platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Платформа для подготовки к экзаменам: каталог курсов, просмотр уроков (YouTube / Rutube) и тренажёр заданий с рендерингом формул через MathJax.
 
-Currently, two official plugins are available:
+## Разработка
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Фронтенд
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Dev-сервер по умолчанию доступен на `http://localhost:5173`. Клиент отправляет API-запросы к локальному бэкенду на `http://localhost:5000/api`.
+
+### Сборка
+
+```bash
+pnpm build
+pnpm preview
+```
+
+## Стек и особенности
+
+- **React 18 + Vite 6** — SPA на базе React Router (`v6`).
+- **Tailwind CSS** — утилитарные стили интерфейса.
+- **MathJax** (`better-react-mathjax`) — поддержка LaTeX-нотации в условиях задач и пояснениях.
+- **Аутентификация** — сессионные куки (`token`, `password`).
+- **Бэкенд** — Python / Flask (`Hosting_server_full`), обработка сессий и валидация ответов.
+
+
